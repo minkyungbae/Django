@@ -25,5 +25,6 @@ urlpatterns = [
     path('data_throw/', views.data_throw),
     path('data_catch/', views.data_catch),
     
-    path('users/<username>/', views.profile),
+    path('users/', views.users),
+    path('users/<str:username>/', views.profile),
 ]
