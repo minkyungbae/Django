@@ -22,6 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('index/', views.index),
     path('hello/', views.hello),
-    path('data-throw/', views.data_throw),
+    path('data_throw/', views.data_throw),
     path('data_catch/', views.data_catch),
 ]
