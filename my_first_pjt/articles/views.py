@@ -23,6 +23,10 @@ def data_catch(request):
     context = {"message": message}
     return render(request, "data_catch.html", context)
 
-def profile(request):
-    return render(request, "profile.html")
+def users(request):
+    return render(request, "users.html")
+
+def profile(request, username):
+    context = {"username": username,}
+    return render(request, "profile.html", context)
 
