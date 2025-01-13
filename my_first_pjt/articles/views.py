@@ -15,3 +15,7 @@ def hello(request):
     }
     return render(request, "hello.html",context)
 
+def data_throw(request):
+    return render(request, "data-throw.html")
+
+    
