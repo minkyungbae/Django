@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Article Detail</h2>
+
+<h3>{{ article.title }}</h3>
+<p>{{ article.content }}</p>
+<p>{{ article.created_at }}</P>
+
+<a href='{% url 'articles' %}'><button>Go to article</button></a>
+<a href='{% url 'edit' article.pk %}'><button>Change Article</button></a>
+
+<form action="{% url 'delete' article.pk %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="delete">
+</form>
+
+{% endblock content %}
