@@ -37,11 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
     'django_extensions',
-    
+    # 내가 만든 앱들 ⬇️
     'articles',
     'users',
+    'accounts',
+    
 ]
 
 MIDDLEWARE = [
