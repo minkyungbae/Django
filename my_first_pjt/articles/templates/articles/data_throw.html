@@ -1,0 +1,17 @@
+{% extends "base.html"%}
+
+{% block content %}
+<h1>Today's what to do list</h1>
+
+<form action="{% url 'articles:data_catch' %}" method="GET">
+
+    <label for="message">To do : </label>
+    <input type="text", id="message" name="message">
+
+    <button type="submit">전송</button>
+
+</form>
+
+<a href="{% url 'index' %}">INDEX로 가기</a>
+
+{% endblock content%}
