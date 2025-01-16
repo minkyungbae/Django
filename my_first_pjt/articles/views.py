@@ -1,6 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Article
 from .forms import ArticleForm
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST, require_http_methods
+
 
 # index 만들기
 def index(request):
@@ -24,10 +27,11 @@ def articles(request):
 
 # 작성된 글 확인
 def article_detail(request, pk):
-    article = Article.objects.get(pk=pk)
+    article = get_object_or_404(Article, pk=pk)
     context = {"article": article}
     return render(request, "articles/article_detail.html", context)
 
+@login_required
 # 새로운 글 작성하기
 def create(request):
     if request.method == "POST":
@@ -41,19 +45,23 @@ def create(request):
     context = {"form": form}
     return render(request, "articles/create.html", context)
 
- 
+
+@require_POST
 # 글 삭제하기
 def delete(request, pk):
-    if request.method == "POST":
-        article = Article.objects.get(pk=pk)
+    if request.user.is_authenticated:
+        article = get_object_or_404
         article.delete()
         return redirect('articles:articles')
     
     return redirect('articles:article_detail', pk)
 
+
+@login_required
+@require_http_methods(["GET", "POST"])
 # 글 수정하기
 def update(request, pk):
-    article = Article.objects.get(pk=pk)
+    article = get_object_or_404(Article, pk=pk)
     if request.method == "POST":
         form = ArticleForm(request.POST, instance=article)  # "instance=article" : article에 있는 내용을 채울 거임
         if form.is_valid():
