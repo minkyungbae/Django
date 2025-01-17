@@ -32,7 +32,7 @@ def logout(request):
 def signup(request):
     form = UserCreationForm()
     context = {'form': form}
-    return render(request, "acounts/signup.html", context)
+    return render(request, "accounts/signup.html", context)
 
 
 
