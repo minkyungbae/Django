@@ -3,11 +3,10 @@
 {% block content %}
 <h1>New Article</h1>
 
-<form action="{% url 'articles:create' %}" method="POST">
-    {% csrf_token%}
+<form action="{% url 'articles:create' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
     {{ form.as_p }}
-    
-    <button type="submit">저장</button><br><br>
+    <button type="submit">Save</button><br><br>
 </form>
 
 <a href='{% url 'articles:articles' %}'>Go to article list</a>
