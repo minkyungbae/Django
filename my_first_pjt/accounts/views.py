@@ -33,7 +33,8 @@ def signup(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)   # 바인딩 form
         if form.is_valid():
-            form.save()
+            user = form.save()
+            auth_login(request, user) # 로그인 하기
             return redirect("index")
     else:
         form = UserCreationForm()
