@@ -30,7 +30,13 @@ def logout(request):
 
 # 회원가입
 def signup(request):
-    form = UserCreationForm()
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)   # 바인딩 form
+        if form.is_valid():
+            form.save()
+            return redirect("index")
+    else:
+        form = UserCreationForm()
     context = {'form': form}
     return render(request, "accounts/signup.html", context)
 
