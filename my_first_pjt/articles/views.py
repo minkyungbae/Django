@@ -35,7 +35,7 @@ def article_detail(request, pk):
 # 새로운 글 작성하기
 def create(request):
     if request.method == "POST":
-        form = ArticleForm(request.POST)   # 데이터 바인딩된 form
+        form = ArticleForm(request.POST, request.FILES)   # 데이터 바인딩된 form, 두 번째 인자로 files을 받음
         if form.is_valid():
             article = form.save()   # 데이터를 저장
             return redirect('articles:article_detail', article.pk)   # article_detail로 리다이렉트
