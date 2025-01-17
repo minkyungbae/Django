@@ -1,11 +1,14 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-    <h1>INDEX PAGE</h1>
+  <h1>INDEX PAGE</h1>
 
-    <ul>
-      <li><a href="{% url 'articles:articles' %}">Move to Articles list</a></li>
-      <li><a href="{% url 'users:users' %}">Move to users</a></li>
-    </ul>	
+  <img src="{% static "articles/굉장해엄청나.png" %}">
+
+  <ul>
+    <li><a href="{% url 'articles:articles' %}">Move to Articles list</a></li>
+    <li><a href="{% url 'users:users' %}">Move to users</a></li>
+  </ul>	
 
 {% endblock content %}
