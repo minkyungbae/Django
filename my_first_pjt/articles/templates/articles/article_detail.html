@@ -4,6 +4,12 @@
 <h2>Article Detail</h2>
 
 <h3>{{ article.title }}</h3>
+
+{% if article.image %}
+		<img src="{{ article.image.url }}">
+{% endif %}		
+
+
 <p>{{ article.content }}</p>
 <p>{{ article.created_at }}</P>
 
