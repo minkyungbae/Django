@@ -3,6 +3,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.views.decorators.http import require_POST
+from django.contrib.auth.forms import UserCreationForm
 
 
 # 로그인
@@ -29,5 +30,9 @@ def logout(request):
 
 # 회원가입
 def signup(request):
-    return render(request, "acounts/signup.html")
+    form = UserCreationForm()
+    context = {'form': form}
+    return render(request, "acounts/signup.html", context)
+
+
 
