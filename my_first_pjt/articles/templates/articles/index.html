@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My First Django PJT</title>
-  </head>
-  <body>
+{% extends 'base.html' %}
+
+{% block content %}
     <h1>INDEX PAGE</h1>
 
     <ul>
@@ -13,5 +8,4 @@
       <li><a href="{% url 'users:users' %}">Move to users</a></li>
     </ul>	
 
-  </body>
-</html>
+{% endblock content %}
