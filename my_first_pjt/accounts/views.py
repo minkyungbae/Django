@@ -25,3 +25,9 @@ def login(request):
 def logout(request):
     auth_logout(request)    # 로그아웃 하기
     return redirect('index')
+
+
+# 회원가입
+def signup(request):
+    return render(request, "acounts/signup.html")
+
