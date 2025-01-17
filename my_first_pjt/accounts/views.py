@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import (
+    AuthenticationForm,
+    UserCreationForm,
+)
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
-from django.views.decorators.http import require_POST
-from django.contrib.auth.forms import UserCreationForm
-
+from django.views.decorators.http import require_POST, require_http_methods
+from .forms import CustomUserChangeForm
 
 # 로그인
 def login(request):
@@ -41,5 +43,25 @@ def signup(request):
     context = {'form': form}
     return render(request, "accounts/signup.html", context)
 
+# 회원탈퇴
+@require_POST
+def delete(request):
+    if request.user.is_authenticated:
+        request.user.delete()
+        auth_logout(request)
+    return redirect("index")
 
-
+# 회원 정보 수정
+@require_http_methods(["GET", "POST"])
+def update(request):
+    if request.method == "POST":
+        # request가 POST인 것들 중에서만 선택.
+        # form을 change할 내용을 instance를 통해 user로 채우겠다.
+        form = CustomUserChangeForm(request.POST, instance=request.user) 
+        if form.is_valid():
+            form.save()
+            return redirect("index")
+    else:
+        form = CustomUserChangeForm(instance=request.user)
+    context = {"form": form}
+    return render(request, "accounts/update.html", context)
