@@ -29,9 +29,11 @@ def articles(request):
 def article_detail(request, pk):
     article = get_object_or_404(Article, pk=pk)
     comment_form = CommentForm()
+    comments = article.comment_set.all()
     context = {
         "article": article,
         "comment_form": comment_form,
+        "comments": comments,
         }
     return render(request, "articles/article_detail.html", context)
 
@@ -84,7 +86,10 @@ def update(request, pk):
 # 댓글 생성
 @require_POST
 def comment_create(request, pk):
+    article = get_object_or_404(Article, pk=pk)
     form = CommentForm(request.POST)
     if form.is_vaild():
-        form.save()
-        return redirect("articles:article_detail", pk)
+        comment = form.save(commit=False)
+        comment.article = article
+        comment.save()
+        return redirect("articles:article_detail", article.pk)
