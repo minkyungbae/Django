@@ -29,7 +29,7 @@ def articles(request):
 def article_detail(request, pk):
     article = get_object_or_404(Article, pk=pk)
     comment_form = CommentForm()
-    comments = article.comment_set.all().order_by("-pk")
+    comments = article.comments.all().order_by("-pk")
     context = {
         "article": article,
         "comment_form": comment_form,
@@ -88,8 +88,8 @@ def update(request, pk):
 def comment_create(request, pk):
     article = get_object_or_404(Article, pk=pk)
     form = CommentForm(request.POST)
-    if form.is_vaild():
+    if form.is_valid():
         comment = form.save(commit=False)
         comment.article = article
         comment.save()
-        return redirect("articles:article_detail", article.pk)
+    return redirect("articles:article_detail", article.pk)
