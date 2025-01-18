@@ -1,14 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import (
     AuthenticationForm,
-    UserCreationForm,
     PasswordChangeForm,
 )
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST, require_http_methods
-from .forms import CustomUserChangeForm
+from .forms import CustomUserChangeForm, CustomUserCreationForm
 from django.contrib.auth import update_session_auth_hash
 
 # 로그인
@@ -36,13 +35,13 @@ def logout(request):
 # 회원가입
 def signup(request):
     if request.method == "POST":
-        form = UserCreationForm(request.POST)   # 바인딩 form
+        form = CustomUserCreationForm(request.POST)   # 바인딩 form
         if form.is_valid():
             user = form.save()
             auth_login(request, user) # 로그인 하기
             return redirect("index")
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
     context = {'form': form}
     return render(request, "accounts/signup.html", context)
 
