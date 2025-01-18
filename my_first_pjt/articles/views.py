@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Article
-from .forms import ArticleForm
+from .forms import ArticleForm, CommentForm
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST, require_http_methods
 
@@ -77,3 +77,10 @@ def update(request, pk):
         }
     return render(request, "articles/update.html", context)
 
+# 댓글 생성
+@require_POST
+def comment_create(request, pk):
+    form = CommentForm(request.POST)
+    if form.is_vaild():
+        form.save()
+        return redirect("articles:article_detail", pk)
