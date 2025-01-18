@@ -28,7 +28,11 @@ def articles(request):
 # 작성된 글 확인
 def article_detail(request, pk):
     article = get_object_or_404(Article, pk=pk)
-    context = {"article": article}
+    comment_form = CommentForm()
+    context = {
+        "article": article,
+        "comment_form": comment_form,
+        }
     return render(request, "articles/article_detail.html", context)
 
 @login_required
