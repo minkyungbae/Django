@@ -29,7 +29,7 @@ def articles(request):
 def article_detail(request, pk):
     article = get_object_or_404(Article, pk=pk)
     comment_form = CommentForm()
-    comments = article.comment_set.all()
+    comments = article.comment_set.all().order_by("-pk")
     context = {
         "article": article,
         "comment_form": comment_form,
