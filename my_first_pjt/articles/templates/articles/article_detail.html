@@ -27,7 +27,15 @@
 <form action="{% url "articles:comment_create" article.pk %}" method="POST">
     {% csrf_token %}
     {{ comment_form.as_p }}
-    <input type="submit" value="comment">
+    <input type="submit" value="Send comment">
 </form>
+
+<ul>
+    {% for comment in comments %}
+        <li>
+            <p>{{ comment.content }}</p>
+        </li>
+    {% endfor %}
+</ul>
 
 {% endblock content %}
