@@ -21,4 +21,13 @@
     <input type="submit" value="delete">
 </form>
 
+<br>
+<hr>
+<h3>Comment</h3>
+<form action="{% url "articles:comment_create" article.pk %}" method="POST">
+    {% csrf_token %}
+    {{ comment_form.as_p }}
+    <input type="submit" value="comment">
+</form>
+
 {% endblock content %}
