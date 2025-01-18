@@ -4,10 +4,10 @@
 <h2>Article Detail</h2>
 
 <h3>{{ article.title }}</h3>
-
+<p>{{ article.author.username }}</p>
 {% if article.image %}
 		<img src="{{ article.image.url }}">
-{% endif %}		
+{% endif %}
 
 
 <p>{{ article.content }}</p>
