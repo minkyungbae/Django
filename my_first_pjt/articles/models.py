@@ -9,8 +9,11 @@ class Article(models.Model):
     image = models.ImageField(upload_to="image/", blank=True)
     
     author = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="articles"
-    )
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="articles")
+       
+    Like_users = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, related_name="Like_articles")
+    
     
     def __str__(self):
         return self.title
