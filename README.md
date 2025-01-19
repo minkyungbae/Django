@@ -41,3 +41,10 @@
 - 클라이언트의 요청에 대해 처리를 분기하는 역할이다.
     - DB도 조회하고 외부로 요청하기도 한다.
     - 응답을 만들어서 클라이언트에게 전달한다.
+
+<hr>
+<h3>pip list</h3>
+1. pip install django==4.2<br><br>
+2. pip install django-extensions<br><br>
+3. pip install ipython<br><br>
+4. pip install pillow<br><br>
