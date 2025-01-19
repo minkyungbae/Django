@@ -95,3 +95,19 @@ def comment_create(request, pk):
         comment.article = article
         comment.save()
     return redirect("articles:article_detail", article.pk)
+
+
+# 좋아요
+@require_POST
+def like(request, pk):
+    if request.user.is_authenticated:
+        article = get_object_or_404(Article, pk=pk)
+        # 만약 article에 좋아요가 user.pk에 해당되는 게 존재한다면,
+        if article.Like_users.filter(pk=request.user.pk).exists():
+            # 좋아요 삭제
+            article.Like_users.remove(request.user)
+        else:
+            # 좋아요 추가
+            article.Like_users.add(request.user)
+        return redirect("articles:articles")
+    return redirect("accounts:login")
